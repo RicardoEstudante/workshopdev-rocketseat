@@ -52,53 +52,21 @@
 		</section>
 
 		<section id="last-ideias">
-			<div class="idea">
-				<img src="https://image.flaticon.com/icons/svg/2729/2729007.svg" alt="imagem de Curso de programação">
 
-				<div class="content">
-					<h3>Cursos de programação</h3>
-					<p>Estudo</p>
-					<div class="description">
-						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti cum quo natus provident itaque quibusdam,
-						inventore sint architecto eius nesciunt, vitae nam nobis iusto consequuntur laboriosam eaque quasi
-						dignissimos. Sit.
+			{% for idea in ideas %}
+				<div class="idea">
+					<img src="{{idea.img}}" alt="imagem de {{idea.title}}">
+
+					<div class="content">
+						<h3>{{idea.title}}</h3>
+						<p>{{idea.category}}</p>
+						<div class="description">{{idea.descripton}}</div>
+						<a href="{{idea.url}}" target="_blank">ir para a ideia</a>
 					</div>
-					<a href="#">ir para a ideia</a>
 				</div>
-			</div>
-
-
-			<div class="idea">
-				<img src="https://image.flaticon.com/icons/svg/2729/2729005.svg" alt="imagem de Exercicios">
-
-				<div class="content">
-					<h3>Exercicios</h3>
-					<p>Saúde</p>
-					<div class="description">
-						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti cum quo natus provident itaque quibusdam,
-						inventore sint architecto eius nesciunt, vitae nam nobis iusto consequuntur laboriosam eaque quasi
-						dignissimos. Sit.
-					</div>
-					<a href="#">ir para a ideia</a>
-				</div>
-			</div>
-
-
-			<div class="idea">
-				<img src="https://image.flaticon.com/icons/svg/2729/2729027.svg" alt="imagem de Meditação">
-
-				<div class="content">
-					<h3>Meditação</h3>
-					<p>Mentalidade</p>
-					<div class="description">
-						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti cum quo natus provident itaque quibusdam,
-						inventore sint architecto eius nesciunt, vitae nam nobis iusto consequuntur laboriosam eaque quasi
-						dignissimos. Sit.
-					</div>
-					<a href="#">ir para a ideia</a>
-				</div>
-			</div>
-
+			{% endfor %}
+		
+			
 		</section>
 
 	</div>
