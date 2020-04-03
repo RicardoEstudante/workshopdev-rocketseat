@@ -1,0 +1,25 @@
+{
+  "name": "workshopdev-rocketseat",
+  "version": "1.0.0",
+  "description": "Desenvolvendo uma aplicação seguindo os passos do Workshopdev da Rocketseat",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RicardoEstudante/workshopdev-rocketseat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RicardoEstudante/workshopdev-rocketseat/issues"
+  },
+  "homepage": "https://github.com/RicardoEstudante/workshopdev-rocketseat#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2"
+  }
+}
