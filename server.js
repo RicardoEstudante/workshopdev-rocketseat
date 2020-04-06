@@ -31,6 +31,20 @@ const ideas = [
         descripton: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti cum quo natus provident itaque quibusdam",
         url: "#"
     }, 
+    {
+        img: "https://image.flaticon.com/icons/svg/2729/2729038.svg",
+        title: "Pintura",
+        category: "Criatividade",
+        descripton: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti cum quo natus provident itaque quibusdam",
+        url: "#"
+    }, 
+    {
+        img: "https://image.flaticon.com/icons/svg/2729/2729048.svg",
+        title: "Recortes",
+        category: "Criatividade",
+        descripton: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti cum quo natus provident itaque quibusdam",
+        url: "#"
+    }, 
 ]
 
 server.use(express.static("public"));
@@ -45,20 +59,23 @@ nunjucks.configure("views", {
 
 server.get("/", function(req, res){
 
+    const reversedIdea = [...ideas].reverse();
+
     let lastIdeas = [];
-    for (let idea of ideas) {
-        if(lastIdeas.length < 3){
+    for (let idea of reversedIdea) {
+        if(lastIdeas.length < 2){
             lastIdeas.push(idea)
         }
     }
-
-    lastIdeas = lastIdeas.reverse();
-
+ 
     return res.render("index.html", { ideas: lastIdeas});
 })
 
 server.get("/ideias", function(req, res){ 
-    return res.render("ideias.html");
+
+    const reversedIdea = [...ideas].reverse();
+
+    return res.render("ideias.html", { ideas: reversedIdea});
 })
 
 server.listen(4000);
