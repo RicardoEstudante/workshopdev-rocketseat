@@ -1,7 +1,9 @@
 const express = require("express");
-
 const server = express();
 
+const db = require("./db")
+
+/**
 const ideas = [
     {
         img: "https://image.flaticon.com/icons/svg/2729/2729007.svg",
@@ -46,8 +48,11 @@ const ideas = [
         url: "#"
     }, 
 ]
+ */
 
 server.use(express.static("public"));
+
+server.use(express.urlencoded({ extended: true }))
 
 const nunjucks = require("nunjucks");
 nunjucks.configure("views", {
@@ -59,23 +64,40 @@ nunjucks.configure("views", {
 
 server.get("/", function(req, res){
 
-    const reversedIdea = [...ideas].reverse();
-
-    let lastIdeas = [];
-    for (let idea of reversedIdea) {
-        if(lastIdeas.length < 2){
-            lastIdeas.push(idea)
+    db.all(`SELECT * FROM ideas`, function(err, rows) {
+        if (err) {
+            console.log(err)
+            return res.send("Erro no banco de dados!")
         }
-    }
- 
-    return res.render("index.html", { ideas: lastIdeas});
+        
+        const reversedIdea = [...rows].reverse();
+
+        let lastIdeas = [];
+        for (let idea of reversedIdea) {
+            if(lastIdeas.length < 2){
+                lastIdeas.push(idea)
+            }
+        }
+    
+        return res.render("index.html", { ideas: lastIdeas});
+    })
+
 })
 
 server.get("/ideias", function(req, res){ 
-
-    const reversedIdea = [...ideas].reverse();
-
-    return res.render("ideias.html", { ideas: reversedIdea});
+    db.all(`SELECT * FROM ideas`, function(err, rows) {
+        if (err) {
+            console.log(err)
+            return res.send("Erro no banco de dados!")
+        }
+        
+        const reversedIdea = [...rows].reverse();
+        
+        return res.render("ideias.html", { ideas: reversedIdea});
+    })
 })
 
+server.post("/", function(req, res){
+    req.body
+})
 server.listen(4000);
