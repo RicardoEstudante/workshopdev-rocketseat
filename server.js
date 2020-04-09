@@ -3,53 +3,6 @@ const server = express();
 
 const db = require("./db")
 
-/**
-const ideas = [
-    {
-        img: "https://image.flaticon.com/icons/svg/2729/2729007.svg",
-        title: "Curso de Programação",
-        category: "Estudos",
-        descripton: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti cum quo natus provident itaque quibusdam",
-        url: "#"
-    },
-    {
-        img: "https://image.flaticon.com/icons/svg/2729/2729005.svg",
-        title: "Exercícios",
-        category: "Saúde",
-        descripton: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti cum quo natus provident itaque quibusdam",
-        url: "#"
-    },
-    {
-        img: "https://image.flaticon.com/icons/svg/2729/2729027.svg",
-        title: "Meditação",
-        category: "Mentalidade",
-        descripton: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti cum quo natus provident itaque quibusdam",
-        url: "#"
-    }, 
-    {
-        img: "https://image.flaticon.com/icons/svg/2729/2729032.svg",
-        title: "Karaokê",
-        category: "Diversão em família",
-        descripton: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti cum quo natus provident itaque quibusdam",
-        url: "#"
-    }, 
-    {
-        img: "https://image.flaticon.com/icons/svg/2729/2729038.svg",
-        title: "Pintura",
-        category: "Criatividade",
-        descripton: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti cum quo natus provident itaque quibusdam",
-        url: "#"
-    }, 
-    {
-        img: "https://image.flaticon.com/icons/svg/2729/2729048.svg",
-        title: "Recortes",
-        category: "Criatividade",
-        descripton: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti cum quo natus provident itaque quibusdam",
-        url: "#"
-    }, 
-]
- */
-
 server.use(express.static("public"));
 
 server.use(express.urlencoded({ extended: true }))
@@ -59,7 +12,6 @@ nunjucks.configure("views", {
     express: server,
     noCache: true,
 })
-
 
 
 server.get("/", function(req, res){
@@ -98,6 +50,32 @@ server.get("/ideias", function(req, res){
 })
 
 server.post("/", function(req, res){
-    req.body
+   
+    const query = `
+        INSERT INTO ideas(
+            image,
+            title,
+            category,
+            description,
+            link
+    ) VALUES (?,?,?,?,?);
+`
+        
+    const values = [
+       req.body.image,
+       req.body.title,
+       req.body.category,
+       req.body.description,
+       req.body.link,
+    ]
+   
+    db.run(query, values, function(err){
+        if (err) {
+            console.log(err)
+            return res.send("Erro no banco de dados!")
+        }
+       
+        return res.redirect("/ideias")
+   })
 })
 server.listen(4000);

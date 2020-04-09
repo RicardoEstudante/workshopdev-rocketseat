@@ -43,22 +43,22 @@ db.serialize(function() {
 */
     
 //DELETANDO DADOS
-/** 
-    db.run(`DELETE FROM ideas WHERE id = ?`, [2], function(err) {
+
+    db.run(`DELETE FROM ideas WHERE id = ?`, [3], function(err) {
         if (err) return console.log(err)
 
         console.log("DELETEI", this)
     })
-*/
+
 
 //LISTANDO DADOS  
-/**
+
     db.all(`SELECT * FROM ideas`, function(err, rows) {
         if (err) return console.log(err)
         
         console.log(rows)
     })
-*/
+
 
 })
 
